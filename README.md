@@ -18,6 +18,8 @@ With mpm-msftool, you can easily access and modify the sound files of the game, 
 You can install mpm-msftool using pip:  
 `pip install mpm-msftool`
 
+After installing it, type `msftool -h` to see if it is working.
+
 ## Usage
 ### pack
 ```
