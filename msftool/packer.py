@@ -16,7 +16,6 @@
 
 
 import io
-import mmap
 import struct
 
 
