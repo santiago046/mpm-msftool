@@ -16,7 +16,7 @@
 
 
 import struct
-
+import sys
 
 def unpack_files(dest_dir, msf_file):
     # Checking destination directory
