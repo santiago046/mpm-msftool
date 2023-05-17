@@ -14,12 +14,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
 import argparse
 import pathlib
 
+from msffile import MSFFile
 
-def parse_arguments():
+
+def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="A tool to unpack/pack Max Payne Mobile's MSF files",
         prog="msftool",
@@ -31,34 +32,52 @@ def parse_arguments():
     # Packing subparser arguments
     parser_pack = subparsers.add_parser(
         "pack",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
         help="pack a directory with .MP3 files to .MSF",
     )
     parser_pack.add_argument(
         "-o",
         "--output",
         default="MaxPayneSoundsv2.msf",
-        help="output file name",
+        help="output file name (default: MaxPayneSoundsv2.msf)",
         metavar="<file>",
+        type=pathlib.Path,
     )
     parser_pack.add_argument(
-        "path", help="path to the directory to pack", type=pathlib.Path
+        "path",
+        help="path to the directory containing .MP3 files",
+        type=pathlib.Path,
     )
 
     # Unpacking subparser arguments
     parser_unpack = subparsers.add_parser(
         "unpack",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
         help="unpack a .MSF file to a directory",
     )
     parser_unpack.add_argument(
         "-o",
         "--output",
         default="mpm_sounds",
-        help="output directory",
+        help="output directory (default: mpm_sounds)",
         metavar="<dir>",
         type=pathlib.Path,
     )
-    parser_unpack.add_argument("path", help="path to the .MSF file to unpack")
+    parser_unpack.add_argument(
+        "path",
+        help="path to the .MSF file to unpack",
+        type=pathlib.Path,
+    )
 
     return parser.parse_args()
+
+
+def main():
+    args = parse_args()
+
+    if args.mode == "pack":
+        MSFFile.pack(src_dir=args.path, dst_file=args.output)
+    if args.mode == "unpack":
+        MSFFile.unpack(dst_dir=args.output, src_file=args.path)
+
+
+if __name__ == "__main__":
+    main()

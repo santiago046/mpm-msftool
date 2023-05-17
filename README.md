@@ -15,8 +15,15 @@ With mpm-msftool, you can easily access and modify the sound files of the game, 
 - [About MSF file](#about-msf-file)
 
 ## Installation
-You can install mpm-msftool using pip:  
-`pip install mpm-msftool`
+You can install mpm-msftool using pip after cloning the repository:  
+```
+# Clone repository
+git clone https://github.com/santiago046/mpm-msftool
+# Change current directory
+cd mpm-msftool
+# Install with pip
+pip install .
+```
 
 After installing it, type `msftool -h` to see if it is working.
 
@@ -61,7 +68,8 @@ The MSF file format is very simple:
 
 | OFFSET |       FIELD      |  TYPE  |
 | :----: | :--------------: | :----: |
-|  0x00  | Magic number     | uint64 |
+|  0x00  | Magic number     | 4 char |
+|  0x04  | Version          | uint32 |
 |  0x08  | Total of files   | uint32 |
 |        |                  |        |
 |  0x0C¹ | File offset²     | uint32 |
