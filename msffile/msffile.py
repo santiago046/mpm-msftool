@@ -48,7 +48,7 @@ class UnsafeFileNameError(Exception):
 class MSFFile:
     """
     Represents an MSF (Max Payne Sound Files) that can pack a directory
-    of MP3 files or unpack MP3 files to a dicrectory
+    of MP3 files or unpack MP3 files to a directory
 
     Attributes:
         SIGNATURE: The expected signature for an MSF file.
